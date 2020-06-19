@@ -45,17 +45,40 @@ function walkTranslationPath(translationDirectory: TranslationDirectory, ...pars
     }
 }
 
+function resolveTranslation(translationDirectory: TranslationDirectory, ...path: string[]): string {
+    const parsedPath = parseTranslationPath(...path);
+    const translation = walkTranslationPath(translationDirectory, ...parsedPath);
+    if (translation == null) {
+        return unresolvedTranslationPath(...path);
+    } else {
+        return translation;
+    }
+}
+
 export function useTranslation(...path: string[]): string {
     const translationDirectory = useContext(TranslationContext);
     if (translationDirectory == null) {
         return unresolvedTranslationPath(...path);
     } else {
-        const parsedPath = parseTranslationPath(...path);
-        const translation = walkTranslationPath(translationDirectory, ...parsedPath);
-        if (translation == null) {
-            return unresolvedTranslationPath(...path);
-        } else {
-            return translation;
-        }
+        return resolveTranslation(translationDirectory, ...path);
     }
+}
+
+export interface BoxedTranslationDirectory {
+    translation(...path: string[]): string;
+}
+
+class BoxedTranslationDirectoryImpl implements BoxedTranslationDirectory {
+    constructor(readonly source: TranslationDirectory) {
+    }
+
+    translation(...path: string[]): string {
+        return resolveTranslation(this.source, ...path);
+    }
+
+}
+
+export function useTranslationDirectory(): BoxedTranslationDirectory {
+    const translationDirectory = useContext(TranslationContext);
+    return new BoxedTranslationDirectoryImpl(translationDirectory || {});
 }
