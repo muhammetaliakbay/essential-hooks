@@ -13,6 +13,7 @@
     "declaration": true,
     "inlineSourceMap": true,
     "strict": true,
-    "target": "ES2015"
+    "target": "ES2019",
+    "jsx": "react"
   }
 }
