@@ -31,7 +31,9 @@ function parseTranslationPath(...path: string[]) {
 function walkTranslationPath(translationDirectory: TranslationDirectory, ...parsedPath: string[]) {
     let level: TranslationDirectory | Translation = translationDirectory;
     for (const part of parsedPath) {
-        if (typeof level === 'string') {
+        if (level == null) {
+            return null;
+        } else if (typeof level === 'string') {
             return null;
         } else {
             level = level[part];

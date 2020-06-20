@@ -1,10 +1,7 @@
 {
   "name": "@muhammetaliakbay/essential-hooks",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "lib/index.js",
-  "files": [
-    "lib"
-  ],
   "types": "lib/index.d.ts",
   "repository": "https://github.com/muhammetaliakbay/essential-hooks",
   "author": "https://github.com/muhammetaliakbay",
