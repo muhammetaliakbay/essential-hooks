@@ -29,3 +29,19 @@ export function useVariable<T>(key: any): [T, (newValue: T) => void, () => T] {
 export function useVariables(): Variables {
     return useContext(VariablesContext);
 }
+
+export function VariableProvider<T>(
+    {
+        key,
+        value,
+        children
+    }: {
+        key: any,
+        value: T,
+        children: ReactNode
+    }
+) {
+    const [, set] = useVariable<T>(key);
+    set(value);
+    return <>{children}</>;
+}
