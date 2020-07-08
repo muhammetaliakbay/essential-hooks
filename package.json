@@ -1,6 +1,6 @@
 {
   "name": "@muhammetaliakbay/essential-hooks",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "https://github.com/muhammetaliakbay/essential-hooks",
@@ -8,7 +8,10 @@
   "scripts": {
     "clean": "rimraf ./lib",
     "build": "tsc",
-    "publish-public": "npm publish --access public"
+    "prepare": "npm run clean && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "tslib": "^2.0.0",
