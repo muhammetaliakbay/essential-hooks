@@ -32,16 +32,16 @@ export function useVariables(): Variables {
 
 export function VariableProvider<T>(
     {
-        key,
+        variable,
         value,
         children
     }: {
-        key: any,
+        variable: any,
         value: T,
         children: ReactNode
     }
 ) {
-    const [, set] = useVariable<T>(key);
+    const [, set] = useVariable<T>(variable);
     set(value);
     return <>{children}</>;
 }
