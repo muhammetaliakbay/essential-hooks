@@ -84,3 +84,11 @@ export function useTranslationDirectory(): BoxedTranslationDirectory {
     const translationDirectory = useContext(TranslationContext);
     return new BoxedTranslationDirectoryImpl(translationDirectory || {});
 }
+
+export function Translation(
+    props: {path: string | string[]} | {children: string | string[]}
+) {
+    const path = 'path' in props ? props.path : props.children;
+    const translation = useTranslation(...(typeof path === 'string' ? [path] : path));
+    return <>{translation}</>;
+}
